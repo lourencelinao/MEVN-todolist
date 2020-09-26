@@ -13,7 +13,7 @@ const todolist = require('./routes/api/todolist')
 app.use('/api/todolist', todolist)
 
 if(process.env.NODE_ENV === 'production'){
-    // static folder
+    //static folder
     app.use(express.static(__dirname + '/public/'))
 
     // SPA handler

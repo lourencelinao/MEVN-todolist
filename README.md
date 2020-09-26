@@ -12,7 +12,7 @@ This is a todolist project for my CS 3105 class, it is built using the following
 ```
 npm run nodemon
 ```
-5. Open the client (open a new terminal and make sure you are in the MEVN-todolist directory)
+5. Open the client <b>(open a new terminal and make sure you are in the MEVN-todolist directory)</b>
 ```
 cd client
 npm install

@@ -1,6 +1,6 @@
 /* eslint-disable */
 const axios = require('axios')
-const url = '/api/todolist/'
+const url = 'api/todolist/'
 // using ajax instead of axios
 class ToDoListService{
     // get

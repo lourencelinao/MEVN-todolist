@@ -4,7 +4,7 @@ module.exports = {
     outputDir: path.resolve(__dirname, '../server/public'),
     devServer: {
         proxy: {
-            '/api/todolist/':{
+            '/api/todolist':{
                 target: 'http://localhost:3000'
             }
         }

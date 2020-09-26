@@ -1,28 +1,73 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="">
+    <div class="container mt-5">
+      <div class="w-1/2 flex mx-auto p-5">
+        <div class="w-4/5 bg-yellow-100">
+          <input type="text" placeholder="Add new item..." class="py-2 px-4 w-full bg-gray-200 
+          focus:outline-none focus:shadow-outline focus:bg-white focus:border-gray-300" v-model="todo">
+        </div>
+        <div class="w-1/6 ml-auto">
+          <button class="w-full h-full font-bold bg-teal-500 text-white 
+          hover:bg-teal-600 rounded focus:outline-none focus:shadow-outline"
+          v-on:click="postToDoList()"> 
+            Add
+          </button>
+        </div>
+      </div>
+      <div class="w-1/2 mx-auto px-5">
+            <div class="bg-orange-200 py-2 px-4">
+              <span class="font-semibold text-orange-700">Note</span>
+              <span class="text-orange-700">
+                : Double click to remove
+              </span>
+          </div>
+      </div>
+      <div class="w-1/2 mx-auto mt-5 px-5">
+        <ul>
+          <li v-for="todo in todos" :key="todo._id" v-on:dblclick="deleteToDoList(todo._id)" 
+          class="py-2 px-4 hover:bg-gray-100 hover:line-through cursor-pointer">
+            {{ todo.todo }}
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import ToDoListService from './Services/ToDoListService'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+  },
+  data() {
+    return {
+      todos: [],
+      todo: ''
+    }
+  },
+  created: async function(){
+    try{
+      // retrieve todo
+      this.todos = await ToDoListService.getToDoList()
+    }catch(err) {
+      console.log(err)
+    }
+  },
+  methods: {
+    postToDoList: async function(){
+      await ToDoListService.postToDoList(this.todo)
+      this.todos = await ToDoListService.getToDoList()
+      this.todo = ''
+    },
+    deleteToDoList: async function(id){
+      await ToDoListService.deleteToDoList(id)
+      this.todos = await ToDoListService.getToDoList()
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import './css/output.css';
 </style>

@@ -35,6 +35,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import ToDoListService from './Services/ToDoListService'
 export default {
   name: 'App',
@@ -43,7 +44,8 @@ export default {
   data() {
     return {
       todos: [],
-      todo: ''
+      todo: '',
+      isDisabled: false
     }
   },
   created: async function(){
@@ -56,9 +58,11 @@ export default {
   },
   methods: {
     postToDoList: async function(){
-      await ToDoListService.postToDoList(this.todo)
-      this.todos = await ToDoListService.getToDoList()
+      const temp = this.todo
       this.todo = ''
+      await ToDoListService.postToDoList(temp)
+      this.todos = await ToDoListService.getToDoList()
+      // this.todo = ''
     },
     deleteToDoList: async function(id){
       await ToDoListService.deleteToDoList(id)

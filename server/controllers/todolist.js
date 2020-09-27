@@ -29,6 +29,17 @@ const deleteToDoList = async (req, res) => {
 // 0EHtPKh9v4TAAlAs
 async function connectDB(){
     const client = await mongodb.MongoClient.connect
+    ('mongodb://localhost:27017/local', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+
+    return client.db('local').collection('todo_list')
+}
+
+/* this is for the mongodb atlas
+async function connectDB(){
+    const client = await mongodb.MongoClient.connect
     ('mongodb+srv://lourence:0EHtPKh9v4TAAlAs@cluster0.qllvf.mongodb.net/todolist?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -36,6 +47,7 @@ async function connectDB(){
 
     return client.db('todolist').collection('todolist')
 }
+*/
 
 module.exports = {
     getToDoList,

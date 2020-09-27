@@ -8,17 +8,17 @@
         </div>
         <div class="w-1/6 ml-auto">
           <button class="w-full h-full font-bold bg-teal-500 text-white 
-          hover:bg-teal-600 rounded focus:outline-none focus:shadow-outline"
-          v-on:click="postToDoList()"> 
+          rounded focus:outline-none focus:shadow-outline"
+          v-on:click="postToDoList()" :disabled="disabled" :class="{ 'hover:bg-teal-600': !disabled }"> 
             Add
           </button>
         </div>
       </div>
       <div class="w-1/2 mx-auto px-5">
             <div class="bg-orange-200 py-2 px-4">
-              <span class="font-semibold text-orange-700">Note</span>
+              <span class="font-semibold text-orange-700">Note: </span>
               <span class="text-orange-700">
-                : Double click to remove
+                Double click to remove
               </span>
           </div>
       </div>
@@ -63,6 +63,11 @@ export default {
     deleteToDoList: async function(id){
       await ToDoListService.deleteToDoList(id)
       this.todos = await ToDoListService.getToDoList()
+    }
+  },
+  computed: {
+    disabled: function() {
+      return this.todo.length === 0
     }
   }
 }

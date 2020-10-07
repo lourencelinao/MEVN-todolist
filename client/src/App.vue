@@ -24,7 +24,7 @@
       </div>
       <div class="w-1/2 mx-auto mt-5 px-5">
         <ul>
-          <li v-for="todo in todos" :key="todo._id" v-on:dblclick="deleteToDoList(todo._id)" 
+          <li v-for="todo in todos" :key="todo._id" v-on:dblclick="deleteToDoList(todo.id)" 
           class="py-2 px-4 hover:bg-gray-100 hover:line-through cursor-pointer">
             {{ todo.todo }}
           </li>
@@ -58,8 +58,8 @@ export default {
   },
   methods: {
     postToDoList: async function(){
-      const temp = this.todo
-      this.todo = ''
+      const temp = this.todo //deter multiple queries when button is clicked consecutively
+      this.todo = '' //deter multiple queries when button is clicked consecutively
       await ToDoListService.postToDoList(temp)
       this.todos = await ToDoListService.getToDoList()
       // this.todo = ''

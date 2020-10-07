@@ -1,6 +1,6 @@
 /* eslint-disable */
 const axios = require('axios')
-const url = 'api/todolist/'
+const url = '/api/todolist/'
 // using ajax instead of axios
 class ToDoListService{
     // get
@@ -24,7 +24,7 @@ class ToDoListService{
     }
     // delete
     static deleteToDoList(id){
-        // i used axios i nhere because for some reason my ajax delete wont also work
+        // i used axios in here because for some reason my ajax delete wont also work
         return axios.delete(`${url}${id}`)
     }
 }
